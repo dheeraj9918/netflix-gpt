@@ -2,7 +2,11 @@
 
 - Create React app
 - configure Tailwindcss
+- roduting
 - Header
+- login form
+- Sign up from
+- form validation
 
 # Features
 

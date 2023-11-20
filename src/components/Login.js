@@ -1,8 +1,18 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Header from './Header';
+import { checkValidData } from '../utils/validate';
 
 const Login = () => {
     const [isSignedIn, setIsSignedIn] = useState(true);
+    const [isErrorMessage, setIsErrorMessage] = useState(null);
+    const password = useRef(null);
+    const email = useRef(null);
+
+
+    const handleButtonRef = () => {
+        const message = checkValidData(email.current?.value, password.current?.value);
+        setIsErrorMessage(message);
+    };
 
     const signInToggleHandler = () => {
         setIsSignedIn(!isSignedIn);
@@ -17,6 +27,7 @@ const Login = () => {
                 />
             </div>
             <form
+                onSubmit={(e) => e.preventDefault()}
                 className='w-[30%] h-[650px] absolute p-12 bg-black bg-opacity-80 my-36 mx-auto right-0 left-0 rounded-xl'>
                 <h1
                     className='text-white font-bold text-3xl w-full my-3'>
@@ -30,7 +41,7 @@ const Login = () => {
                             className='p-3 my-4 w-full bg-gray-700 rounded-md'
                         />
                         <input
-                            type="mobile no"
+                            type="text"
                             placeholder='Ex. +91 9918183765'
                             className='p-3 my-4 w-full bg-gray-700 rounded-md'
                         />
@@ -40,16 +51,20 @@ const Login = () => {
 
 
                 <input
+                    ref={email}
                     type="email"
-                    placeholder={isSignedIn ? 'Email or phone no' : "Mobile no"}
+                    placeholder={isSignedIn ? 'Email or phone no' : 'Email'}
                     className='p-3 my-4 w-full bg-gray-700 rounded-md'
                 />
                 <input
+                    ref={password}
                     type="password"
                     placeholder='Enter password'
                     className='p-3 my-4 w-full bg-gray-700 rounded-md'
                 />
+                <p className='text-red-500 font-bold'>{isErrorMessage}</p>
                 <button
+                    onClick={handleButtonRef}
                     className='p-3 my-6 bg-red-600 w-full text-white font-bold rounded-md' >
                     {isSignedIn ? "Sign In" : "Sign Up"}
                 </button>
@@ -67,3 +82,4 @@ const Login = () => {
     )
 }
 export default Login;
+

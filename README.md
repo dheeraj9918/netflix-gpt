@@ -1,12 +1,20 @@
 # Netflix GPT
 
 - Create React app
-- configure Tailwindcss
-- roduting
+- Configure Tailwindcss
+- Roduting
 - Header
-- login form
+- Login form
 - Sign up from
-- form valdation
+- Form validation
+- UseRef Hook
+- Firebase setup
+- Deploying to our app to production
+- Create sign up user account
+- Implement sign in user account
+- Create Redux store with user slice
+- implemented sign out 
+- update profile
 
 # Features
 
@@ -19,7 +27,7 @@
     - Trailer in background
     - Title and discription
     - Movie suggestions
-      - MovieList * N
+      - MovieList \* N
 - NetFlix GPT
   - Search Bar
   - Movie suggestions

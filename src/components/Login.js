@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import Header from './Header';
 import { checkValidData } from '../utils/validate';
 import { auth } from '../utils/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/appSlice';
+import { BACKGROUN_IMAGE, USER_AVATAR } from '../utils/constants';
 
 const Login = () => {
     const [isSignedIn, setIsSignedIn] = useState(true);
@@ -13,7 +14,7 @@ const Login = () => {
     const name = useRef(null);
     const password = useRef(null);
     const email = useRef(null);
-    const navigate = useNavigate();
+   
     const dispatch = useDispatch();
 
 
@@ -30,7 +31,7 @@ const Login = () => {
                     const user = userCredential.user;
                     updateProfile(user, {
                         displayName: name.current.value,
-                        photoURL: "https://www2.shutterstock.com/blog/wp-content/uploads/sites/5/2016/03/fall-trees-road-1.jpg"
+                        photoURL: USER_AVATAR
                     }).then(() => {
                         const { uid, email, displayName, photoURL } = auth.currentUser;
                         dispatch(
@@ -40,7 +41,6 @@ const Login = () => {
                                 displayName: displayName,
                                 photoURL: photoURL
                             }));
-                        navigate("/browse")
                     }).catch((error) => {
                         setIsErrorMessage(error.message);
                     });
@@ -57,8 +57,6 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    navigate("/browse")
-                    console.log(user);
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -76,7 +74,7 @@ const Login = () => {
             <div className='absolute bg-black'>
                 <img
                     className='opacity-60'
-                    src="https://assets.nflxext.com/ffe/siteui/vlv3/a09bb938-2d90-42ae-986e-5a3e4abf9e77/8eb1e781-3494-4aa4-9405-268ca6473e4c/IN-en-20231113-popsignuptwoweeks-perspective_alpha_website_large.jpg" alt='backgroundImage'
+                    src={BACKGROUN_IMAGE} alt='backgroundImage'
                 />
             </div>
             <form
@@ -89,6 +87,7 @@ const Login = () => {
                 {!isSignedIn && (
                     <>
                         <input
+                            ref={name}
                             type="text"
                             placeholder='Full Name'
                             className='p-3 my-4 w-full bg-gray-700 rounded-md'

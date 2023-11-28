@@ -35,6 +35,8 @@
 - TMDB image CDN URL search
 - Made the browser page  amazing with tailwind css
 - Make custom hooks usePapularMovies for where api fetch
+- GPT Search page and gpt searchbar
+- make multilanguage page in our app
 
 # Features
 
